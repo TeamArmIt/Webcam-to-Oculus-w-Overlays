@@ -1,32 +1,40 @@
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import cv2
+import ast
+matplotlib.use('GTKAgg') 
 plt.ion() ## Note this correction
 fig=plt.figure()
-
+f, axarr = plt.subplots(3, sharex=True)
+axarr[0].set_title('Yaw')
+axarr[1].set_title('Pitch')
+axarr[2].set_title('Roll')
 i=0
-#x=list()
+#x=range(10)
 #y=list()
-f=open('pitch.txt', 'r')
 while True:
+	temp=0
 	coord=raw_input()
-	x=0
-	y=0
-	z=0
+	ncoord=coord.split()
+	#print ncoord
+	'''
 	if 'x:' in coord:
-		x=float(coord[2:])
-		plt.scatter(i,x, color='red')
+		temp=float(coord[2:])
+		axarr[0].scatter(i,temp, color='red')
 	elif 'y:' in coord:
-		y=float(coord[2:]))
-		plt.scatter(i,y, color='green')
+		temp=float(coord[2:])
+		axarr[1].scatter(i,temp, color='green')
 	elif 'z:' in coord:
-		z=float(coord[2:])
-		plt.scatter(i,z, color='blue')
+		temp=float(coord[2:])
+		axarr[2].scatter(i,temp, color='blue')
+	'''
 	#x.append(i)
-	#y.append(temp_y)
-	
+	#y.append(temp)
+	axarr[0].scatter(i,float(ncoord[0]), color='red')
+	axarr[1].scatter(i,float(ncoord[1]), color='green')
+	axarr[2].scatter(i,float(ncoord[2]), color='blue')
 	i+=1
 	plt.show() #plt.pause(0.0001) #Note this correction
 	plt.pause(.0001)
-	if cv2.waitKey(20) == 27:
-		break
+	
